@@ -1,0 +1,12 @@
+import boto3
+import jsonpy
+
+def lambda_handler(event, context):
+    message = event['Records'][0]['Sns']['Message']
+    phone_number = '<insert parent phone number here>'
+    sns = boto3.client('sns')
+    sns.publish(PhoneNumber=phone_number, Message=message)
+    return {
+        'statusCode': 200,
+        'body': json.dumps('SMS notification sent successfully.')
+    }
